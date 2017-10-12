@@ -27,5 +27,8 @@ public class Main {
 	    System.out.println(s);
 
 	    NumberQuesser nq = new NumberQuesser();
+
+	    Game game = new Game();
+	    game.start();
     }
 }
