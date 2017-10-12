@@ -1,16 +1,11 @@
-public class SquareModifier implements SequenceModifier {
-
-    int start;
-    int step;
+public class SquareModifier extends SequenceModifier {
 
     public SquareModifier() {
-        this.start = 0;
-        this.step = 1;
+        super();
     }
 
     public SquareModifier(int start, int step) {
-        this.start = start;
-        this.step = step;
+        super(start, step);
     }
 
     @Override

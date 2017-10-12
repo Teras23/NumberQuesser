@@ -1,16 +1,13 @@
-public class MultipicationModifier implements SequenceModifier {
+public class MultipicationModifier extends SequenceModifier {
     private int multiplication;
-    private int step;
-    private int start;
 
     public MultipicationModifier() {
+        super();
         this.multiplication = 2;
-        this.step = 1;
-        this.start = 0;
     }
 
     public MultipicationModifier(int multiplication) {
-        this();
+        super();
         this.multiplication = multiplication;
     }
 

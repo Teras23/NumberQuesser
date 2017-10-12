@@ -1,23 +1,19 @@
-public class IncrementModifier implements SequenceModifier {
+public class IncrementModifier extends SequenceModifier {
     private int increment;
-    private int start;
-    private int step;
 
     public IncrementModifier() {
+        super();
         this.increment = 1;
-        this.start = 0;
-        this.step = 1;
     }
 
     public IncrementModifier(int increment) {
-        this();
+        super();
         this.increment = increment;
     }
 
     public IncrementModifier(int increment, int start, int step) {
+        super(start, step);
         this.increment = increment;
-        this.start = start;
-        this.step = step;
     }
 
     @Override
