@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    private boolean handycapMode;
+    private boolean handicapMode;
     private boolean running = false;
     private Difficulty difficulty;
 
@@ -11,12 +11,12 @@ public class Game {
     };
 
     public Game() {
-        handycapMode = true;
+        handicapMode = true;
         difficulty = Difficulty.EASY;
     }
 
-    public void setHandycapMode(boolean handycapMode) {
-        this.handycapMode = handycapMode;
+    public void sethandicapMode(boolean handicapMode) {
+        this.handicapMode = handicapMode;
     }
 
     public void setDifficulty(Difficulty difficulty) {
@@ -30,10 +30,10 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         String hc = scanner.next();
         if(hc.equals("n")) {
-            handycapMode = false;
+            handicapMode = false;
         }
 
-        if(handycapMode)
+        if(handicapMode)
             System.out.println("Kergendatud mänguviis on sisse lülitatud");
         else
             System.out.println("Kergendatud mänguviis on välja lülitatud");

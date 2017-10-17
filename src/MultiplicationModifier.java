@@ -1,12 +1,12 @@
-public class MultipicationModifier extends SequenceModifier {
+public class MultiplicationModifier extends SequenceModifier {
     private int multiplication;
 
-    public MultipicationModifier() {
+    public MultiplicationModifier() {
         super();
         this.multiplication = 2;
     }
 
-    public MultipicationModifier(int multiplication) {
+    public MultiplicationModifier(int multiplication) {
         super();
         this.multiplication = multiplication;
     }

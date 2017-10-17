@@ -6,7 +6,7 @@ public class Main {
 
 	    IncrementModifier im = new IncrementModifier(3);
         SquareModifier sm = new SquareModifier();
-        MultipicationModifier mm = new MultipicationModifier(2);
+        MultiplicationModifier mm = new MultiplicationModifier(2);
 
 	    System.out.println(s);
 
