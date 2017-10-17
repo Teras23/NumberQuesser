@@ -8,7 +8,7 @@ public class NumberQuesser {
         Random seedGenerator = new Random();
         seed = Math.abs(seedGenerator.nextInt() % 10000);
         random = new Random(seed);
-        System.out.println(seed);
+        //System.out.println(seed);
     }
 
     public NumberQuesser(int seed) {
