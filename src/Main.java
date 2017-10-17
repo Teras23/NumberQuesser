@@ -8,23 +8,15 @@ public class Main {
         SquareModifier sm = new SquareModifier();
         MultiplicationModifier mm = new MultiplicationModifier(2);
 
-	    System.out.println(s);
-
+	    /*System.out.println(s);
 	    s.modify(im);
-
 	    System.out.println(s);
-
 	    s.modify(sm);
-
 	    System.out.println(s);
-
 	    s.modify(mm);
-
 	    System.out.println(s);
-
 	    s.modify(im);
-
-	    System.out.println(s);
+	    System.out.println(s);*/
 
 	    NumberQuesser nq = new NumberQuesser();
 
