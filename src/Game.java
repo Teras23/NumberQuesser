@@ -45,24 +45,27 @@ public class Game {
             System.out.println("Kergendatud mänguviis on välja lülitatud");
         */
 
-        System.out.println("Valige mängu raskus:");
+        System.out.println("Valige jada raskus:");
         System.out.println("1 - kerge\n2 - keskmine\n3 - raske");
-        int dif = scanner.nextInt();
+
+        String dif = scanner.next().trim();
 
         switch (dif) {
-            case 2:
+            case "2":
                 difficulty = 2;
-                System.out.println("Mängu raskus on keskmine");
+                System.out.println("Jada raskus on keskmine");
                 break;
-            case 3:
+            case "3":
                 difficulty = 3;
-                System.out.println("Mängu raskus on raske");
+                System.out.println("Jada raskus on raske");
                 break;
             default:
                 difficulty = 1;
-                System.out.println("Mängu raskus on kerge");
+                System.out.println("Jada raskus on kerge");
                 break;
         }
+
+        System.out.println();
 
         /*
         System.out.println("Kui on, sisestage sõbra mängukood (0000-9999):");
@@ -81,6 +84,7 @@ public class Game {
         }
         */
 
+        System.out.println();
         gameLoop();
     }
 
@@ -97,29 +101,47 @@ public class Game {
 
             Random random = new Random();
 
+            String[] explanations = new String[difficulty];
+
             for (int i = 0; i < difficulty; i++) {
                 int rnd1 = random.nextInt(3);
                 int rnd2 = random.nextInt(4) + 1;
 
                 if (rnd1 == 0) {
                     IncrementModifier m = new IncrementModifier(rnd2);
+                    explanations[i] = "suurendati " + String.valueOf(rnd2) + " võrra";
                     s.modify(m);
                 }
                 if (rnd1 == 1) {
                     MultiplicationModifier m = new MultiplicationModifier(rnd2);
+                    explanations[i] = "korrutati " + String.valueOf(rnd2) + "-ga";
                     s.modify(m);
                 }
                 if (rnd1 == 2) {
                     SquareModifier m = new SquareModifier();
+                    explanations[i] = "võeti ruutu";
                     s.modify(m);
                 }
             }
+
+            String explanation = "Kõigepealt võeti täisarvud alates nullist ja seejärel iga liige ";
+
+            for (int i = 0; i < explanations.length; i++) {
+                explanation += explanations[i];
+                if (i < explanations.length - 1) {
+                    explanation += " ning siis ";
+                }
+                else if (i < explanations.length - 2) {
+                    explanation += ", siis";
+                }
+            }
+            explanation += ". ";
 
             int[] answers = s.getEnding();
             System.out.println(Arrays.toString(s.getBeginning()));
             System.out.println("Sisesta jada kolm järgmist arvu tühikuga eraldatuna. Kolm korda võid arvata.");
 
-            boolean arvatud = false;
+            boolean guessed = false;
 
             for (int i = 0; i < 3; i++) {
 
@@ -127,30 +149,41 @@ public class Game {
                 String hc = scanner.nextLine();
                 String[] arvud = hc.split(" ");
 
-                if (Integer.valueOf(arvud[0]).equals(answers[0])) {
-                    if (Integer.valueOf(arvud[1]).equals(answers[1])) {
-                        if (Integer.valueOf(arvud[2]).equals(answers[2])) {
-                            arvatud = true;
+                try {
+                    if (Integer.valueOf(arvud[0]).equals(answers[0])) {
+                        if (Integer.valueOf(arvud[1]).equals(answers[1])) {
+                            if (Integer.valueOf(arvud[2]).equals(answers[2])) {
+                                guessed = true;
+                            }
                         }
                     }
                 }
+                catch(Exception e) {
 
-                if (arvatud) {
+                }
+
+                if (guessed) {
                     System.out.println("Tubli, see on õige!");
                     break;
                 }
                 else {
                     System.out.println("Vale.");
+                    if (i == 2) {
+                        System.out.println("Jada õige jätk oli: " + answers[0] + ", " + answers[1] + ", " + answers[2]);
+                        System.out.println(explanation);
+                        System.out.println();
+                    }
                 }
             }
 
-            System.out.println("Kas te tahate mängu jätkata?");
+            System.out.println("Kas te tahate mängu jätkata? [jah/ei]");
             Scanner scanner = new Scanner(System.in);
             String hc = scanner.next();
-            if(hc.equals("n")) {
+            if(hc.equals("ei")) {
                 running = false;
             }
         }
+
         System.out.println("Aitäh mängimast!");
     }
 }
