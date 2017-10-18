@@ -18,7 +18,7 @@ public class Main {
 	    s.modify(im);
 	    System.out.println(s);*/
 
-	    NumberQuesser nq = new NumberQuesser();
+	    //NumberQuesser nq = new NumberQuesser();
 
 	    Game game = new Game();
 	    game.start();

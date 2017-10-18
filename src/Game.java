@@ -14,7 +14,7 @@ public class Game {
     };*/
 
     public Game() {
-        handicapMode = true;
+        handicapMode = false;
         //difficulty = Difficulty.EASY;
         difficulty = 1;
     }
@@ -29,21 +29,23 @@ public class Game {
 
     public void start() {
 
+        System.out.println("Tere tulemast numbrite äraarvamismängu NumberQuesser!");
+
         Scanner scanner = new Scanner(System.in);
 
-        /*System.out.println("Kas te tahate kergendatud mänguviisi? ([y]/n)");
-        System.out.println("Kergendatud mänguviis ütleb, kas teie number on kadunud numbrist väikesem või suurem.");
+        System.out.println("Kas te tahate kergendatud mänguviisi? (jah/ei)");
+        System.out.println("Kergendatud mänguviisis tuleb ära arvata üks jada keskel asuv arv. " +
+                "Tavalises mänguviisis tuleb ära arvata jada järgmised kolm numbrit.");
 
-        String hc = scanner.next();
-        if(hc.equals("n")) {
-            handicapMode = false;
+        String hc = scanner.next().trim();
+        if(hc.equals("jah")) {
+            handicapMode = true;
         }
 
         if(handicapMode)
             System.out.println("Kergendatud mänguviis on sisse lülitatud");
         else
             System.out.println("Kergendatud mänguviis on välja lülitatud");
-        */
 
         System.out.println("Valige jada raskus:");
         System.out.println("1 - kerge\n2 - keskmine\n3 - raske");
@@ -84,7 +86,6 @@ public class Game {
         }
         */
 
-        System.out.println();
         gameLoop();
     }
 
@@ -137,45 +138,80 @@ public class Game {
             }
             explanation += ". ";
 
-            int[] answers = s.getEnding();
-            System.out.println(Arrays.toString(s.getBeginning()));
-            System.out.println("Sisesta jada kolm järgmist arvu tühikuga eraldatuna. Kolm korda võid arvata.");
+            if (!handicapMode) {
+                int[] answers = s.getEnding();
+                System.out.println(Arrays.toString(s.getBeginning()));
+                System.out.println("Sisesta jada kolm järgmist arvu tühikuga eraldatuna. Kolm korda võid arvata.");
 
-            boolean guessed = false;
+                boolean guessed = false;
 
-            for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++) {
 
-                Scanner scanner = new Scanner(System.in);
-                String hc = scanner.nextLine();
-                String[] arvud = hc.split(" ");
+                    Scanner scanner = new Scanner(System.in);
+                    String hc = scanner.nextLine().trim();
+                    String[] arvud = hc.split(" ");
 
-                try {
-                    if (Integer.valueOf(arvud[0]).equals(answers[0])) {
-                        if (Integer.valueOf(arvud[1]).equals(answers[1])) {
-                            if (Integer.valueOf(arvud[2]).equals(answers[2])) {
-                                guessed = true;
+                    try {
+                        if (Integer.valueOf(arvud[0]).equals(answers[0])) {
+                            if (Integer.valueOf(arvud[1]).equals(answers[1])) {
+                                if (Integer.valueOf(arvud[2]).equals(answers[2])) {
+                                    guessed = true;
+                                }
                             }
                         }
                     }
-                }
-                catch(Exception e) {
+                    catch (Exception e) {
 
-                }
+                    }
 
-                if (guessed) {
-                    System.out.println("Tubli, see on õige!");
-                    break;
-                }
-                else {
-                    System.out.println("Vale.");
-                    if (i == 2) {
-                        System.out.println("Jada õige jätk oli: " + answers[0] + ", " + answers[1] + ", " + answers[2]);
-                        System.out.println(explanation);
-                        System.out.println();
+                    if (guessed) {
+                        System.out.println("Tubli, see on õige!");
+                        break;
+                    } else {
+                        System.out.println("Vale.");
+                        if (i == 2) {
+                            System.out.println("Jada õige jätk oli: " + answers[0] + ", " + answers[1] + ", " + answers[2]);
+                            System.out.println(explanation);
+                            System.out.println();
+                        }
                     }
                 }
             }
 
+            else {
+                int answer = s.getMiddle();
+                System.out.println(Arrays.toString(s.getEdges()));
+                System.out.println("Sisesta jada keskel olev nulliga varjatud arv. Kolm korda võid arvata. ");
+
+                boolean guessed = false;
+
+                for (int i = 0; i < 3; i++) {
+
+                    Scanner scanner = new Scanner(System.in);
+                    String input = scanner.nextLine().trim();
+
+                    try {
+                        if (Integer.valueOf(input).equals(answer)) {
+                            guessed = true;
+                        }
+                    }
+                    catch (Exception e) {
+
+                    }
+
+                    if (guessed) {
+                        System.out.println("Tubli, see on õige!");
+                        break;
+                    } else {
+                        System.out.println("Vale.");
+                        if (i == 2) {
+                            System.out.println("Jada õige puuduv liige oli: " + answer);
+                            System.out.println(explanation);
+                            System.out.println();
+                        }
+                    }
+                }
+            }
             System.out.println("Kas te tahate mängu jätkata? [jah/ei]");
             Scanner scanner = new Scanner(System.in);
             String hc = scanner.next();
