@@ -1,7 +1,5 @@
 import java.util.*;
 
-import static java.lang.Integer.parseInt;
-
 public class Game {
 
     private boolean handicapMode;
