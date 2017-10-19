@@ -45,6 +45,20 @@ public class Sequence {
         return beginning;
     }
 
+    public String getBeginningString() {
+        StringBuilder text = new StringBuilder();
+
+        int[] beginningNumbers = getBeginning();
+
+        for (int i = 0; i < beginningNumbers.length; i++) {
+            text.append(beginningNumbers[i]);
+            text.append(", ");
+        }
+
+        text.append("X, X, X");
+        return text.toString();
+    }
+
     public int getMiddle() {
         return numbers[numbers.length/2];
     }

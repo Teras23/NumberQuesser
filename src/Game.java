@@ -192,7 +192,7 @@ public class Game {
 
             if (!handicapMode) {
                 int[] answers = s.getEnding();
-                System.out.println(Arrays.toString(s.getBeginning()));
+                System.out.println(s.getBeginningString());
                 System.out.println("Sisesta jada kolm järgmist arvu tühikuga eraldatuna. Kolm korda võid arvata.");
 
                 boolean guessed = false;
